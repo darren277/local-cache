@@ -1,0 +1,33 @@
+version: '3'
+
+services:
+  nginx-cache:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - nginx_cache:/var/cache/nginx/proxy_cache
+    restart: unless-stopped
+    # Extra hosts to allow connections to host machine
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    networks:
+      - proxy-network
+
+  # Optional: Connect to other Docker containers with Flask servers
+  # Example of a Flask container
+  # flask-service:
+  #   image: your-flask-image
+  #   container_name: flask-container
+  #   networks:
+  #     - proxy-network
+
+networks:
+  proxy-network:
+    driver: bridge
+
+volumes:
+  nginx_cache:
