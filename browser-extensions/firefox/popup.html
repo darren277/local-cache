@@ -1,0 +1,32 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Local Server Cache</title>
+    <style>
+        body {
+            width: 300px;
+            font-family: Arial, sans-serif;
+            padding: 10px;
+        }
+        button {
+            margin: 5px 0;
+            padding: 5px 10px;
+        }
+        .stats {
+            margin-top: 10px;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Local Server Cache</h2>
+    <button id="clearCache">Clear Cache</button>
+    <div class="stats">
+        <p>Cached items: <span id="itemCount">0</span></p>
+        <p>Storage used: <span id="storageSize">0</span> KB</p>
+    </div>
+    <script src="popup.js"></script>
+</body>
+</html>
