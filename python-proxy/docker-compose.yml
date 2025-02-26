@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  cache-proxy:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    volumes:
+      - cache-data:/cache
+    environment:
+      - CACHE_TTL=600
+      - CACHE_CLEANUP_INTERVAL=3600
+    restart: unless-stopped
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    networks:
+      - proxy-network
+
+networks:
+  proxy-network:
+    driver: bridge
+
+volumes:
+  cache-data:
